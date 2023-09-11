@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialize = {
+const initialState = {
   session: {
     value: 1500,
     runningValue: 1500
@@ -20,10 +20,8 @@ const initialize = {
 
 export const chrono = createSlice({
   name: "chrono",
-  initialize,
+  initialState,
   reducer: {
-
-  }
-})
+}})
 
 export default chrono.reducer
