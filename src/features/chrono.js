@@ -23,14 +23,23 @@ export const chrono = createSlice({
   initialState,
   reducer: {
     updateChronoValues: (state, action) => {
-      const choseState = state[action.payload.type]
+      const chosenState = state[action.payload.type]
+      if (chosenState.value + action.payload.value === 0) return
 
-      if(choseState.value + action.payload.value === 0) return
-      if(action.payload.type === "session") {
-        if(!state.isPlaying) {
-          choseState.value = choseState.value + action.payload.value
-          state.displayValue.value = choseState.value
+      if (action.payload.type === "session") {
+        if (state.session.value === state.session.runningValue) {
+          chosenState.value = chosenState.value + action.payload.value
+          chosenState.runningValue = chosenState.runningValue + action.payload.value
+          state.displayedValue.value = chosenState.runningValue
         }
+        else {
+          chosenState.value = chosenState.value + action.payload.value
+        }
+      }
+
+
+      if (action.payload.type === "pause") {
+        chosenState.value = chosenState.value + action.payload.value
       }
     }
 }})
